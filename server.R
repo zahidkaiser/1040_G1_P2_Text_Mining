@@ -29,6 +29,7 @@ function(input, output, session) {
     v <- terms()
     wordcloud_rep(names(v), v, scale=c(4,0.5),
                   min.freq = input$freq, max.words=input$max,
-                  colors=brewer.pal(8, "Dark2"))
+                  colors=brewer.pal(8, "Dark2"),
+                  random.order = input$random)
   })
 }

@@ -14,7 +14,9 @@ fluidPage(
                   min = 1,  max = 50, value = 15),
       sliderInput("max",
                   "Maximum Number of Words:",
-                  min = 1,  max = 300,  value = 100)
+                  min = 1,  max = 300,  value = 100),
+      checkboxInput("random",
+                  "Random Order")
     ),
     
     # Show Word Cloud
