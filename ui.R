@@ -5,9 +5,15 @@ fluidPage(
   sidebarLayout(
     # Sidebar with a slider and selection inputs
     sidebarPanel(
-      selectInput("selection", "Choose a book:",
-                  choices = books),
-      actionButton("update", "Change"),
+      #selectInput("selection", "Choose a book:",
+                  #choices = books),
+      #actionButton("update", "Change"),  
+      fileInput("selection", "Upload a text file for Word Cloud",
+                multiple = TRUE,
+                accept = c("text/plain")
+                ),
+      actionButton("update", "Create Word Cloud"),
+      
       hr(),
       sliderInput("freq",
                   "Minimum Frequency:",
@@ -20,8 +26,18 @@ fluidPage(
     ),
     
     # Show Word Cloud
+    #mainPanel(
+      #plotOutput("plot")
+    #)
     mainPanel(
-      plotOutput("plot")
+      tabsetPanel(
+        tabPanel("Word Cloud",
+                 plotOutput("plot")
+                ),
+        tabPanel("Word List",
+                 tableOutput("word.list")
+                 )
+      )
     )
   )
 )
