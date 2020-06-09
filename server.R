@@ -43,6 +43,7 @@ function(input, output, session) {
         play.b <- FALSE
         gutenberg.b <- FALSE
         novel.b <- FALSE
+        dramatispersonae.b <- FALSE
         starttext.v <-  grep("chapter 1", text.tolower.v)
         if (is.na(starttext.v[1])) { 
           starttext.v <-  grep("chapter i", text.tolower.v)
@@ -87,6 +88,7 @@ function(input, output, session) {
           # mostly of names, which is undesirable
           startpersonalist.v <- grep("dramatis", text.tolower.v)
           
+          dramatispersonae.b <- TRUE
           if (!is.na(startpersonalist.v[1])) { #found the list of dramatic personae
             
             personas.v <- text.tolower.v[(startpersonalist.v[1]+1):(length(text.tolower.v)-(startpersonalist.v[1]+1))]
@@ -163,7 +165,7 @@ function(input, output, session) {
         ############################################
         myStopwords <- c(stopwords(language="en", source="smart"), "available", "via", "the")
         
-        if (play.b){ #add list of personas to stoplist 
+        if (dramatispersonae.b){ #add list of personas to stoplist 
           personas2 <- unlist(personas.v)
           myCorpus <- tm_map(myCorpus, removeWords, personas2)
         }
